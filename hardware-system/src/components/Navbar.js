@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react';
-
+import pic1 from '../img/pic1.png'; 
 
 function Link({ to, children, className = "", ...props }) {
     return (
@@ -26,8 +26,6 @@ const Navbar = () => {
       return 'Contact';
     } else if (path.startsWith('/categories/')) {
       return 'Categories';
-    } else if (path === '/paint' || path.startsWith('/paint')) {
-      return 'Paint';
     }
     return '';
   };
@@ -38,7 +36,6 @@ const Navbar = () => {
       setActiveLink(getCurrentPage());
     };
 
-    
     updateActiveLink();
 
     // Listen for browser navigation (back/forward buttons)
@@ -54,16 +51,15 @@ const Navbar = () => {
   }, []);
 
   const categories = [
-    'Electronics',
-    'Paints',
-    'Accessories',
+    { name: 'Electronics', path: '/categories/electronics' },
+    { name: 'Paints', path: './paint' },
+    { name: 'Accessories', path: './accessories' },
   ];
 
   const navigationLinks = [
     { name: 'Home', path: '/' },
     { name: 'Shop', path: '/shop' },
     { name: 'Contact', path: '/contact' },
-    
   ];
 
   const toggleMobileMenu = () => {
@@ -78,7 +74,14 @@ const Navbar = () => {
     // Update active link immediately for better UX
     setActiveLink(linkName);
     setIsMobileMenuOpen(false);
-    
+  };
+
+  const handleCategoryClick = (categoryName, categoryPath) => {
+    setActiveLink('Categories');
+    setIsCategoriesOpen(false);
+    setIsMobileMenuOpen(false);
+    // Navigate to the category page
+    window.location.href = categoryPath;
   };
 
   const closeMobileMenu = () => {
@@ -95,7 +98,7 @@ const Navbar = () => {
             
             {/* Logo - Left Side */}
             <div className="navbar-logo">
-             <img src="/logo.png" alt="Logo" className="logo-image" />
+             <img src={pic1} />
             </div>
 
             {/* Desktop Navigation - Center */}
@@ -133,12 +136,15 @@ const Navbar = () => {
                   <div className="dropdown-content">
                     {categories.map((category, index) => (
                       <Link
-                        key={category}
-                        to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                        key={category.name}
+                        to={category.path}
                         className={`dropdown-item ${index !== categories.length - 1 ? 'dropdown-item-bordered' : ''}`}
-                        onClick={() => handleLinkClick('Categories', `/categories/${category.toLowerCase().replace(/\s+/g, '-')}`)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleCategoryClick(category.name, category.path);
+                        }}
                       >
-                        {category}
+                        {category.name}
                       </Link>
                     ))}
                   </div>
@@ -148,8 +154,8 @@ const Navbar = () => {
 
             {/* Right Side Icons */}
             <div className="navbar-actions">
-              {/* Desktop Icons */}
-              <div className="desktop-icons">
+              {/* Icons visible on all screen sizes */}
+              <div className="navbar-icons">
                 <Link 
                   to="/search" 
                   className="icon-button"
@@ -164,7 +170,7 @@ const Navbar = () => {
                 >
                   <ShoppingCart size={20} />
                   {/* Cart badge */}
-                  <span className="cart-badge">3</span>
+                  <span className="cart-badge">30</span>
                 </Link>
                 <Link 
                   to="/account" 
@@ -231,53 +237,23 @@ const Navbar = () => {
                 <div className="mobile-submenu-content">
                   {categories.map((category, index) => (
                     <Link
-                      key={category}
-                      to={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`}
+                      key={category.name}
+                      to={category.path}
                       className="mobile-category-link"
                       style={{ transitionDelay: `${index * 30}ms` }}
-                      onClick={() => {
-                        handleLinkClick('Categories', `/categories/${category.toLowerCase().replace(/\s+/g, '-')}`);
-                        closeMobileMenu();
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCategoryClick(category.name, category.path);
                       }}
                     >
-                      {category}
+                      {category.name}
                     </Link>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* Mobile Icons Section */}
-            <div className="mobile-icons-section">
-              <div className="mobile-icons-grid">
-                <Link 
-                  to="/search" 
-                  className="mobile-icon-button"
-                  onClick={closeMobileMenu}
-                >
-                  <Search size={20} />
-                  <span className="mobile-icon-label">Search</span>
-                </Link>
-                <Link 
-                  to="/cart" 
-                  className="mobile-icon-button mobile-cart-button"
-                  onClick={closeMobileMenu}
-                >
-                  <ShoppingCart size={20} />
-                  <span className="mobile-icon-label">Cart</span>
-                  {/* Mobile cart badge */}
-                  <span className="mobile-cart-badge">3</span>
-                </Link>
-                <Link 
-                  to="/account" 
-                  className="mobile-icon-button"
-                  onClick={closeMobileMenu}
-                >
-                  <User size={20} />
-                  <span className="mobile-icon-label">Account</span>
-                </Link>
-              </div>
-            </div>
+
           </div>
         </div>
       </nav>

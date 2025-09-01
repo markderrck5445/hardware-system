@@ -42,6 +42,24 @@
   flex-shrink: 0;
 }
 
+.navbar-logo {
+  display: flex;
+  align-items: center;   /* vertically center the logo */
+}
+
+.navbar-logo img {
+  height: 60px;          /* adjust logo size */
+  width: auto;           /* keep aspect ratio */
+  object-fit: contain;   
+  cursor: pointer;       
+  transition: transform 0.2s ease-in-out;
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.05); /* small zoom effect on hover */
+}
+
+
 .logo-link {
   font-size: 24px;
   font-weight: bold;
