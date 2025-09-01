@@ -1,4 +1,11 @@
 /* Navbar Styles */
+
+ *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
 .navbar-wrapper {
   position: relative;
 }
@@ -10,12 +17,14 @@
   background-color: white;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid #e5e7eb;
+  
 }
 
 .navbar-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 16px;
+  z-index: 1000;
 }
 
 @media (min-width: 640px) {
@@ -538,3 +547,190 @@
   background-color: rgba(0, 0, 0, 0.5);
   visibility: visible;
 }
+
+
+.hero-section {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          padding: 80px 50px;
+          max-width: 1400px;
+          margin: 0 auto;
+          gap: 60px;
+          background: linear-gradient(135deg, #d9eafc 0%, #ebf0f5 100%);
+        }
+
+        .hero-content {
+          flex: 1;
+          max-width: 600px;
+          animation: slideInLeft 0.8s ease-out;
+        }
+
+        .hero-content h1 {
+          font-size: 3.5rem;
+          font-weight: 800;
+          color: #1a202c;
+          line-height: 1.1;
+          margin-bottom: 24px;
+          letter-spacing: -0.02em;
+        }
+
+        .hero-content p {
+          font-size: 1.25rem;
+          color: #4a5568;
+          line-height: 1.6;
+          margin-bottom: 32px;
+          font-weight: 400;
+        }
+
+        .shop-now-button {
+          display: inline-block;
+          background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+          color: white;
+          padding: 16px 32px;
+          text-decoration: none;
+          font-size: 1.1rem;
+          font-weight: 600;
+          border-radius: 12px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 10px 25px rgba(49, 130, 206, 0.3);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .shop-now-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: left 0.5s;
+        }
+
+        .shop-now-button:hover::before {
+          left: 100%;
+        }
+
+        .shop-now-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 15px 35px rgba(49, 130, 206, 0.4);
+          background: linear-gradient(135deg, #2c5282 0%, #2a4365 100%);
+        }
+
+        .hero-image {
+          flex: 1;
+          position: relative;
+          height: 500px;
+          overflow: hidden;
+          animation: slideInRight 0.8s ease-out 0.2s both;
+        }
+
+        .slideshow-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+          transform: scale(1.1);
+        }
+
+        .slideshow-image.active {
+          opacity: 1;
+          transform: scale(1);
+          transition: opacity 1s ease-in-out, transform 8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+          .hero-section {
+            padding: 60px 40px;
+            gap: 40px;
+          }
+          
+          .hero-content h1 {
+            font-size: 3rem;
+          }
+          
+          .hero-image {
+            height: 400px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-section {
+            flex-direction: column;
+            padding: 40px 20px;
+            text-align: center;
+            min-height: auto;
+          }
+          
+          .hero-content {
+            max-width: 100%;
+          }
+          
+          .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+          }
+          
+          .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 28px;
+          }
+          
+          .hero-image {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+          }
+          
+          .shop-now-button {
+            padding: 14px 28px;
+            font-size: 1rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-section {
+            padding: 30px 15px;
+          }
+          
+          .hero-content h1 {
+            font-size: 2rem;
+          }
+          
+          .hero-content p {
+            font-size: 1rem;
+          }
+          
+            .hero-image {
+              height: 250px;
+            }
+          }
