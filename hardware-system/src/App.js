@@ -12,6 +12,8 @@ import Categories from './pages/Categories';
 import Sign from './pages/Sign ';
 import Contact from './pages/Contact'; 
 import Paint from './pages/Paint';
+import Account from './pages/Account';
+import Electronic from './pages/Electronic';
 import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import Footer from './components/Footer';
@@ -32,8 +34,10 @@ function App() {
             <Route path="/sign" element={<Sign />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/Paint" element={<Paint />} />
+            <Route path="/account" element={<Account />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/electronics" element={<Electronic />} />
             <Route path="/footer" element={<Footer />} />
           </Routes>
         </div>

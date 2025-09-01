@@ -51,7 +51,7 @@ const Navbar = () => {
   }, []);
 
   const categories = [
-    { name: 'Electronics', path: '/categories/electronics' },
+    { name: 'Electronics', path: './electronics' },
     { name: 'Paints', path: './paint' },
     { name: 'Accessories', path: './accessories' },
   ];
@@ -170,10 +170,10 @@ const Navbar = () => {
                 >
                   <ShoppingCart size={20} />
                   {/* Cart badge */}
-                  <span className="cart-badge">30</span>
+                  <span className="cart-badge">300</span>
                 </Link>
                 <Link 
-                  to="/account" 
+                  to="./account" 
                   className="icon-button"
                   title="User Account"
                 >
